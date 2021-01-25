@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: repeating-linear-gradient(#ffe6f9, 90px, #f8f5fa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/*********************************/
+
+.person-wrapper {
+
+}
+.person {
+    display: inline-block;
+    padding: 30px;
+    width: 15rem;
+    height: auto;
+    text-align: center;
+}
+.person img {
+    border-radius: 50%;
+    box-shadow: 0 0  30px 0 rgb(132, 209, 253);
+}
+.person .fullname {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 10px auto;
+}
+.person .email {
+    font-style: italic;
+    font-size: 0.8rem;
+    margin-top: -10px;
+}
+
+/*********************************/
+
+.bottom-controls-wrapper {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+.bottom-controls-wrapper button {
+    width: 100%;
+    padding: 20px 0;
+    font-size: 20px;
+    border-radius: 0;
+}
+
+/*********************************/
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.5s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

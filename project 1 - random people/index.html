@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 - Random People</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+</head>
+<body>
+    <div id="RandomPeopleApp">
+        <div class="container">
+            <div 
+                v-if="!listOfPeopleComputed.length"
+                class="controls-wrapper fade-in"
+            >
+                <div class="row">
+                    <h1>Random People App</h1>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>How many random people ?</label>
+                        <input class="form-control" v-model="howManyPeople" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <button 
+                            v-if="!isLoading"
+                            @click="getRandomPeople"
+                            class="btn btn-primary"
+                        >
+                            <i class="fa fa-download"></i> Re-populate
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="person-wrapper">
+                <div class="row">
+                    <div
+                        v-for="(person, key) of listOfPeopleComputed"
+                        :key="key"
+                        v-show="listOfPeopleComputed.length"
+                        class="person fade-in"
+                    >
+                        <img :src="person.profileImage" />
+                        <p class="fullname">{{ person.fullName }}</p>
+                        <p class="email">{{ person.email }}</p>
+                    </div>
+                </div>
+                <div 
+                    class="row"
+                    v-if="isLoading"
+                >
+                    <i class="fas fa-3x fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-controls-wrapper">
+            <button
+                @click="resetListOfPeople"
+                class="btn btn-lg btn-secondary"
+                v-show="listOfPeopleComputed.length"
+            >
+                <i class="fa fa-trash"></i> Reset
+            </button>
+        </div>
+    </div>
+        
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
+
+<!-- 
+    Libaries & APIs used:
+    https://randomuser.me/
+    https://github.com/axios/axios
+    https://vuejs.org/v2/guide/
+    https://fontawesome.com/
+    https://getbootstrap.com/
+-->
