@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 - Check Face, Country Guess</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yusei+Magic" />
+</head>
+<body>
+    <div id="loading" class="loading-wrapper">
+        <img src="https://i.pinimg.com/736x/61/ea/94/61ea94b38db7f292dcf6dda1513b8253.jpg" class="fade-in" />
+    </div>
+    <div id="main" class="wrapper fade-in" style="display: none;">
+        <div id="confetti-canvas" class="confetti-wrapper" style="display: none;">
+            <canvas></canvas>
+        </div>
+        <div id="score" class="score">
+            <p>
+                Your total score is: 
+                <span id="total-guessed">0</span>
+                <span> / </span>
+                <span id="total-questions">0</span>
+            </p>
+        </div>
+        <div id="face" class="person-face">
+            <img src="https://randomuser.me/api/portraits/men/90.jpg" />
+        </div>
+        <div id="answers" class="country-guess active">
+            <p id="A">
+                <span class="flag-icon"></span>
+                <span class="country-name">Greece</span> 
+            </p>
+            <p id="B">
+                <span class="flag-icon"></span>
+                <span class="country-name">Romania</span> 
+            </p>
+            <p id="C">
+                <span class="flag-icon"></span>
+                <span class="country-name">USA</span> 
+            </p>
+            <p id="D">
+                <span class="flag-icon"></span>
+                <span class="country-name">United Kingdom</span> 
+            </p>
+        </div>
+        <div id="respond" class="respond-button fade-in">
+            <button disabled>Answer</button>
+        </div>
+        <div id="respond-message" class="respond-message" style="display: none;">
+            <div id="correct" style="display: none;">
+                <p style="color: green;">
+                    Congratulations! <span style="font-weight: normal">You've nailed it</span>
+                </p>
+                <button>Try ANOTHER one ?</button>
+            </div>
+            <div id="incorrect" style="display: none;">
+                <p style="color: red;">NOPE!</p>
+                <button>Continue... ?</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3/dist/confetti.browser.min.js"></script>
+    <script src="app.js" type="module"></script>
+</body>
+</html>
+
+<!--
+    https://github.com/lipis/flag-icon-css
+    https://coolors.co/daff7d-b2ef9b-8c86aa-81559b-7e3f8f
+    https://gist.githubusercontent.com/keeguon/2310008/raw/bdc2ce1c1e3f28f9cab5b4393c7549f38361be4e/countries.json#
+
+Additions:
+- do 50/50
+- request the city he/she's from
+-->
