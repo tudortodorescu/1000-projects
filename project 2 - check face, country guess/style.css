@@ -1,10 +1,10 @@
 * {
     box-sizing: border-box;
-    font-family: "Yusei Magic", sans-serif;
+    font-family: "Yusei Magic", sans-serif
 }
 
 body {
-    background-image: repeating-linear-gradient(#7E3F8F, 90px, #8C86AA);
+    background: repeating-linear-gradient(#7E3F8F, 90px, #8C86AA);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,21 +13,25 @@ body {
     overflow: hidden;
     margin: 0;
 }
+
 .loading-wrapper {
     width: 100%;
     background: white;
     position: fixed;
     display: flex;
 }
+
 .loading-wrapper img {
     margin: 0 auto;
 }
+
 .wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
+
 .confetti-wrapper {
     position: fixed;
     top: 0;
@@ -75,6 +79,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .country-guess.active p {
     cursor: pointer;
 }
@@ -84,12 +89,7 @@ body {
     transform: scale(1.05);
     box-shadow: 0 0 5px 0 #7E3F8F;
 }
-.country-guess.active p:hover {
-    background: linear-gradient( #DAFF7D, #B2EF9B );
-}
-.country-guess.active p.selected {
-    background: linear-gradient( #B2EF9B, #DAFF7D );
-}
+
 .country-guess p.correct {
     background: greenyellow;
 }
@@ -147,21 +147,22 @@ body {
     font-size: 24px;
     margin: 20px 0 0;
 }
-/*********************************/
+
+/******************************************/
 
 .fade-in {
-	opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: 0.5s;
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.5s;
 }
 
 @keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

@@ -1,15 +1,15 @@
-import { randomNumber } from "/app/utils/math.utils.js"
-import { handleAnswersEvents, handleRespondEvents, handleContinueEvents } from "./event-handlers/GuessFaceUI-event-handlers.js"
+import { randomNumber } from '/app/utils/math.utils.js'
+import { handleAnswersEvents, handleRespondEvents, handleContinueEvents } from './event-handlers/GuessFaceUI.event-handlers.js'
 
 export default class GuessFaceUI {
     constructor( inObj ) {
         Object.assign( this, inObj )
 
-        ///////
+        /////////////////
 
         this.answerIndex = null
         this.answers = []
-        this.randomPerson = null
+        this.person = null
 
         this.totalGuessed = 0
         this.totalQuestions = 0
@@ -20,19 +20,19 @@ export default class GuessFaceUI {
     initEvents() {
         handleAnswersEvents.apply( this )
         handleRespondEvents.apply( this )
-        handleContinueEvents.apply( this )  
+        handleContinueEvents.apply( this )
     }
 
     startFakeLoading() {
-        this.loadingEl.style.display = ''
         this.mainEl.style.display = 'none'
-
-        setTimeout(_ => {
-            this.loadingEl.style.display = 'none'
-            this.mainEl.style.display = ''
-        }, randomNumber( 15, 5 ) * 100)
-    }
+        this.loadingEl.style.display = ''
     
+        setTimeout(_ => {
+            this.mainEl.style.display = ''
+            this.loadingEl.style.display = 'none'
+        }, randomNumber( 10, 5 ) * 100 )
+    }
+
     removeAnswersClasses() {
         this.answersEls.forEach( answerEl => {
             answerEl.classList.remove( 'selected' )
@@ -41,32 +41,29 @@ export default class GuessFaceUI {
             answerEl.classList.remove( 'extra-answer' )
         })
     }
-    
-    hasAnswerSelected() {
+
+    get hasAnswerSelected() {
         return [ ...this.answersEls ].reduce( (initial, answerEl) => {
             return initial || answerEl.classList.contains( 'selected' )
         }, false)
     }
     
     setEnabledOrDisabledRespondButton() {
-        const hasAnswerSelected = this.hasAnswerSelected()
-        
         this.respondButtonEl[
-            hasAnswerSelected ? 
+            this.hasAnswerSelected ? 
                 'removeAttribute' :
                 'setAttribute'
-        ]( 'disabled', hasAnswerSelected )
+        ]( 'disabled', this.hasAnswerSelected )
     }
-
-    //////////////////////
 
     setFaceImage() {
-        this.faceImgEl.setAttribute( 'src', this.randomPerson.image )
+        this.faceImgEl.setAttribute( 'src', this.person.image )
     }
+
     setAnswersElements() {
         this.answersEls.forEach( (answerEl, index) => {
-            const countryNameEl = answerEl.querySelector( '.country-name' ) 
-            countryNameEl.innerText =  this.answers[ index ].name
+            const countryNameEl = answerEl.querySelector( '.country-name' )
+            countryNameEl.innerText = this.answers[ index ].name
 
             const flagIconEl = answerEl.querySelector( '.flag-icon' )
             flagIconEl.className = ''
@@ -75,12 +72,10 @@ export default class GuessFaceUI {
         })
     }
 
-    ////////////////////
-
     makeConfetti() {
         this.confettiCanvasEl.parentElement.style.display = ''
 
-        const confettiInstance = confetti.create(this.confettiCanvasEl, {
+        const confettiInstance = confetti.create( this.confettiCanvasEl, {
             resize: true,
             useWorker: true
         })

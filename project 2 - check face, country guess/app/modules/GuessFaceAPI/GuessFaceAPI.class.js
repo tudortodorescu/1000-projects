@@ -13,20 +13,19 @@ export default class GuessFaceAPI {
             await this.fetchRandomPeople()
             this.formatRandomPeopleData()
             resolve()
-        })    
+        })
     }
 
     fetchRandomPeople() {
         return new Promise( resolve => {
             this.randomPeopleData = randomPeople
-
             resolve()
             return
-            
-            axios.get(  API_URL )
-                .then(res => {
+
+            axios.get( API_URL )
+                .then( res => {
                     this.randomPeopleData = res?.data?.results
-                    resolve() 
+                    resolve()
                 })
         })
     }

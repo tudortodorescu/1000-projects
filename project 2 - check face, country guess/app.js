@@ -1,15 +1,14 @@
-
-import { qs, qsa } from "/app/utils/dom.utils.js"
-import GuessFaceUI from "/app/modules/GuessFaceUI/GuessFaceUI.class.js"
-import GuessFaceRandomPerson from "/app/modules/GuessFaceRandomPerson/GuessFaceRandomPerson.class.js"
-import GuessFaceAPI from "/app/modules/GuessFaceAPI/GuessFaceAPI.class.js"
+import { qs, qsa } from '/app/utils/dom.utils.js'
+import GuessFaceAPI from '/app/modules/GuessFaceAPI/GuessFaceAPI.class.js'
+import GuessFaceUI from './app/modules/GuessFaceUI/GuessFaceUI.class.js'
+import GuessFaceRandomPerson from './app/modules/GuessFaceRandomPerson/GuessFaceRandomPerson.class.js'
 
 (async _ => {
     const guessFaceApi = new GuessFaceAPI()
 
-    const guessFaceUi = new GuessFaceUI({ 
+    const guessFaceUi = new GuessFaceUI({
         mainEl                : qs( '#main' ),
-        loadingEl             : qs( '#loading img' ),
+        loadingEl             : qs( '#loading' ),
         confettiCanvasEl      : qs( '#confetti-canvas canvas' ),
         answersWrapperEl      : qs( '#answers' ),
         answersEls            : qsa( '#answers p' ),
@@ -22,20 +21,22 @@ import GuessFaceAPI from "/app/modules/GuessFaceAPI/GuessFaceAPI.class.js"
         totalQuestionsEl      : qs( '#total-questions' ),
         faceImgEl             : qs( '#face img' ),
     })
-    
+
     const guessFaceRandomPerson = new GuessFaceRandomPerson({
         guessFaceUi,
         guessFaceApi
     })
-
+    
     window.guessFaceApi = guessFaceApi
     window.guessFaceUi = guessFaceUi
     window.guessFaceRandomPerson = guessFaceRandomPerson
-
+    
     guessFaceUi.startFakeLoading()
     await guessFaceApi.init()
-    
+
     guessFaceRandomPerson.loadRandomPerson()
     guessFaceUi.initEvents()
-
+    
 })()
+
+

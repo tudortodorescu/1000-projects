@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 2 - Check Face, Country Guess</title>
+    <title>Project - Check face, country guess</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yusei+Magic" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
 </head>
 <body>
     <div id="loading" class="loading-wrapper">
@@ -18,7 +18,7 @@
         </div>
         <div id="score" class="score">
             <p>
-                Your total score is: 
+                Your total score is:
                 <span id="total-guessed">0</span>
                 <span> / </span>
                 <span id="total-questions">0</span>
@@ -28,21 +28,21 @@
             <img src="https://randomuser.me/api/portraits/men/90.jpg" />
         </div>
         <div id="answers" class="country-guess active">
-            <p id="A">
-                <span class="flag-icon"></span>
-                <span class="country-name">Greece</span> 
+            <p>
+                <span class="flag-icon flag-icon-gr"></span>
+                <span class="country-name">Greece</span>
             </p>
-            <p id="B">
-                <span class="flag-icon"></span>
-                <span class="country-name">Romania</span> 
+            <p>
+                <span class="flag-icon flag-icon-us"></span>
+                <span class="country-name">USA</span>
             </p>
-            <p id="C">
-                <span class="flag-icon"></span>
-                <span class="country-name">USA</span> 
+            <p>
+                <span class="flag-icon flag-icon-gb"></span>
+                <span class="country-name">United Kingdom</span>
             </p>
-            <p id="D">
-                <span class="flag-icon"></span>
-                <span class="country-name">United Kingdom</span> 
+            <p>
+                <span class="flag-icon flag-icon-hu"></span>
+                <span class="country-name">Hungary</span>
             </p>
         </div>
         <div id="respond" class="respond-button fade-in">
@@ -51,12 +51,14 @@
         <div id="respond-message" class="respond-message" style="display: none;">
             <div id="correct" style="display: none;">
                 <p style="color: green;">
-                    Congratulations! <span style="font-weight: normal">You've nailed it</span>
+                    Congratulations! You've nailed it
                 </p>
                 <button>Try ANOTHER one ?</button>
             </div>
             <div id="incorrect" style="display: none;">
-                <p style="color: red;">NOPE!</p>
+                <p style="color: red;">
+                    NOPE!
+                </p>
                 <button>Continue... ?</button>
             </div>
         </div>
@@ -67,13 +69,3 @@
     <script src="app.js" type="module"></script>
 </body>
 </html>
-
-<!--
-    https://github.com/lipis/flag-icon-css
-    https://coolors.co/daff7d-b2ef9b-8c86aa-81559b-7e3f8f
-    https://gist.githubusercontent.com/keeguon/2310008/raw/bdc2ce1c1e3f28f9cab5b4393c7549f38361be4e/countries.json#
-
-Additions:
-- do 50/50
-- request the city he/she's from
--->

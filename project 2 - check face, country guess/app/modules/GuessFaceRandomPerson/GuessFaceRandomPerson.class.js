@@ -11,13 +11,14 @@ export default class GuessFaceRandomPerson {
         this.randomPersonCountry = {}
         this.randomAnswers = []
     }
+
     loadRandomPerson() {
         return new Promise( resolve => {
             this.setRandomPerson()
             this.setRandomPersonCountry()
             this.setRandomAnswers()
-            
-            this.guessFaceUi.randomPerson = this.randomPerson
+
+            this.guessFaceUi.person = this.randomPerson
             this.guessFaceUi.answers = this.randomAnswers
 
             this.guessFaceUi.setFaceImage()
@@ -30,7 +31,7 @@ export default class GuessFaceRandomPerson {
     setRandomPerson() {
         if ( !this.guessFaceApi.people.length ) return
 
-        const length = this.guessFaceApi.people.length 
+        const length = this.guessFaceApi.people.length
         const index = randomNumber( length )
 
         this.randomPerson = this.guessFaceApi.people.splice( index, 1 )[ 0 ]
@@ -39,35 +40,34 @@ export default class GuessFaceRandomPerson {
             return this.setRandomPerson()
         }
     }
+
     setRandomPersonCountry() {
         if ( !this.randomPerson || !countries ) return
 
-        this.randomPersonCountry = countries.find(country => 
-            country.name.toLowerCase() === this.randomPerson.country.toLowerCase() )
+        this.randomPersonCountry = countries.find( country => 
+            country.name.toLowerCase() === this.randomPerson.country.toLowerCase())
 
         if ( !this.randomPersonCountry ) {
             this.setRandomPerson()
             return this.setRandomPersonCountry()
-        } 
+        }
     }
-    setRandomAnswers() {
-        this.randomAnswers = []
 
-        this.randomAnswers.push(...[
+    setRandomAnswers() {
+        this.randomAnswers = [
             { ...generateRandomCountry(), correct: false },
             { ...generateRandomCountry(), correct: false },
             { ...generateRandomCountry(), correct: false },
             { ...this.randomPersonCountry, correct: true }
-        ])
+        ]
 
         this.randomAnswers = shuffleArray( this.randomAnswers )
 
         function generateRandomCountry() {
-            const length = countries.length 
+            const length = countries.length
             const index = randomNumber( length )
 
             return countries[ index ]
         }
-        
     }
 }
