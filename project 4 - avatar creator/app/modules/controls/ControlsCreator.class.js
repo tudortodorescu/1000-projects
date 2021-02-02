@@ -69,13 +69,17 @@ export default class ControlsCreator {
         this.setCssStyles( targetClass, options[ defaultOption ])
     }
 
-    setCssStyles( targetClass, option ) {
-        const targetEl = document.querySelector( `.${ targetClass }` )
+    setCssStyles( targetClasses, option ) {
+        for ( const targetClass of targetClasses ) {
+            const targetEls = document.querySelectorAll( `.${ targetClass }` )
         
-        for ( const cssProperty in option ) {
-            const cssValue = option[ cssProperty ]
-            
-            targetEl.style[ cssProperty ] = cssValue
+            for (const targetEl of targetEls) {
+                for ( const cssProperty in option ) {
+                    const cssValue = option[ cssProperty ]
+                    
+                    targetEl.style[ cssProperty ] = cssValue
+                }
+            }
         }
     }
 }

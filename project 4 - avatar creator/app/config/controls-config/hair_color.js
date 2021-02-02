@@ -1,7 +1,7 @@
 
 export default {
     title: 'Hair Color',
-    targetClass: 'js_hair',
+    targetClass: [ 'js_hair' ],
     selectorClass: 'js_hair_color',
     defaultOption: 'black',
     options: {
