@@ -1,7 +1,9 @@
 
 export default {
-    title: 'Hair Style',
-    targetClass: [ 'js_hair' ],
+    labelTitle: 'Hair Style',
+    targetClasses: [
+        'js_hair',
+    ],
     selectorClass: 'js_hair_style',
     defaultOption: 'afro',
     options: {
