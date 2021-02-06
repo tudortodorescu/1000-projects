@@ -73,8 +73,9 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: url(https://i.pinimg.com/originals/b2/b0/84/b2b084ad6061dfe2122302266ea8af58.jpg);
+    background: url('/img/world.jpg');
     background-position: center left;
+    
 }
 #block {
     width: 45px;
@@ -114,6 +115,10 @@ body {
 @keyframes blockAnimation {
     0% { left: 100vw; }
     100% { left: -50px; }
+}
+@keyframes backgroundAnimation {
+    0% { background-position-x: 0 }
+    100% { background-position-x: 100vw }
 }
 @keyframes starAnimation1 {
     0% { left: 50vw; }

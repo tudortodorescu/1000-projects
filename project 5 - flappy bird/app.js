@@ -109,6 +109,7 @@ function handleCharacterAnimation( direction ) {
 
 
 let numOfHoles = 0
+let soundCount = 0 
 
 function handleCharacterCollisions() {
     const colisionBlock =  detectColision( character, block )
@@ -121,7 +122,14 @@ function handleCharacterCollisions() {
 
     else if ( colisionHole ) {
         scoreTotal++
-        // (new Audio('/sounds/hole.wav')).play()
+
+        
+        soundCount++
+        if ( soundCount > 35 ) {
+            (new Audio('/sounds/hole.wav')).play()
+            soundCount = 0
+        }
+        
         changeScoreUi()
 
         if ( gameStopped ) return
@@ -157,6 +165,8 @@ function characterJump() {
         changeGameState({ diff: -3, direction: 'up' })
 
         if ( jumpCount > 20 ) {
+            (new Audio('/sounds/fly.wav')).play()
+        
             clearInterval( jumpInterval )
             isJumping = false
             jumpCount = 0
@@ -184,6 +194,7 @@ function setEventListeners() {
         resetCharacterPosition()
         resetScore()
         changeScoreUi()
+        startBgAnimation()
         setTimeout(_ => {
             gameStopped = false
         })
@@ -206,7 +217,7 @@ function gameOver() {
     stopBlockAnimation()
     stopGravity()
     hideStar()
-    
+    stopBgAnimation()
 }
 
 function resetCharacterPosition() {
@@ -256,6 +267,13 @@ function stopBlockAnimation() {
 
 }
 
+function stopBgAnimation() {
+    game.style.animation = ''   
+}
+function startBgAnimation() {
+    game.style.animation = 'backgroundAnimation 5s infinite linear'
+}
+
 function startGravity() {
     gravityStopped = false
 }
@@ -291,6 +309,7 @@ function gameInit() {
     resetCharacterPosition()
     resetScore()
     resetAllAnimations()  
+    startBgAnimation()
 }
 
 
