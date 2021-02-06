@@ -58,6 +58,14 @@ body {
     cursor: pointer;
     border: 0;
 }
+#star {
+    background: url(/img/star.png);
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    background-position: center;
+    background-size: contain;
+}
 
 #game {
     width: 100vw;
@@ -103,6 +111,26 @@ body {
 
 @keyframes blockAnimation {
     0% { left: 100vw; }
+    100% { left: -50px; }
+}
+@keyframes starAnimation1 {
+    0% { left: 50vw; }
+    100% { left: -50px; }
+}
+@keyframes starAnimation2 {
+    0% { left: 60vw; }
+    100% { left: -50px; }
+}
+@keyframes starAnimation3 {
+    0% { left: 70vw; }
+    100% { left: -50px; }
+}
+@keyframes starAnimation4 {
+    0% { left: 80vw; }
+    100% { left: -50px; }
+}
+@keyframes starAnimation5 {
+    0% { left: 90vw; }
     100% { left: -50px; }
 }
 @keyframes rotateUp {

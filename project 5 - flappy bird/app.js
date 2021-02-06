@@ -6,7 +6,7 @@ Object.assign( window, {
     roundNum
 })
 
-let game, block, hole, character, score, gameoverscreen, 
+let game, block, hole, character, score, gameoverscreen, star,
     gravityStopped, isJumping, gameStopped, scoreTotal, gameSpeed
 
 function getElements() {
@@ -16,6 +16,7 @@ function getElements() {
     character = document.querySelector( '#character' )
     score = document.querySelector( '#score' )
     gameoverscreen = document.querySelector( '#gameoverscreen' )
+    star = document.querySelector( '#star' )
 }
 
 function setInitialValues() {
@@ -41,30 +42,42 @@ function beginGravity() {
 }
 
 function changeGameState({ diff, direction }) {
+    handleStarDetection()
     handleGameSpeed()
     handleCharacterAnimation( direction )
     handleCharacterCollisions()
     handleCharacterPosition( diff )
 }
 
+function handleStarDetection() {
+    if ( star.style.display === 'none' ) return
+
+    if ( detectColision( character, star ) ) {
+        (new Audio('/sounds/star.wav')).play()
+        scoreTotal += 150
+        hideStar()
+        changeScoreUi()
+    }
+}
+
 function handleGameSpeed() {
     let doReset = false
 
-    if ( scoreTotal > 700 ) {
+    if ( scoreTotal > 5000 ) {
         gameSpeed = 'ridiculous'
         doReset = true
     }
 
-    else if ( scoreTotal > 400 ) {
+    else if ( scoreTotal > 2000 ) {
         gameSpeed = 'superfast'
         doReset = true
     }
 
-    else if ( scoreTotal > 250 ) {
+    else if ( scoreTotal > 750 ) {
         gameSpeed = 'fast'
         doReset = true
     }
-    else if ( scoreTotal > 100 ) {
+    else if ( scoreTotal > 250 ) {
         gameSpeed = 'normal'
         doReset = true
     }
@@ -75,7 +88,7 @@ function handleGameSpeed() {
         setTimeout( _ => {
             if ( gameStopped ) return
 
-            resetBlockAnimation()
+            resetAllAnimations()
         }, timeoutLength )
     }
 }
@@ -91,7 +104,10 @@ function handleCharacterAnimation( direction ) {
     }
 }
 
-function handleCharacterCollisions() {
+
+let numOfHoles = 0
+
+async function handleCharacterCollisions() {
     const colisionBlock =  detectColision( character, block )
     const colisionHole =  detectColision( character, hole, { y1: -46, y2: 47 })
 
@@ -102,7 +118,18 @@ function handleCharacterCollisions() {
 
     else if ( colisionHole ) {
         scoreTotal++
+        // (new Audio('/sounds/hole.wav')).play()
         changeScoreUi()
+
+        if ( gameStopped ) return
+
+        numOfHoles++ 
+        if ( numOfHoles > 150  ) {
+            numOfHoles = 0
+
+            showStar()
+            setTimeout(_ => hideStar(), 1500)
+        }
     }
 }
 
@@ -144,13 +171,13 @@ function setEventListeners() {
     })
     window.addEventListener('resize', _ => {
         if ( gameStopped ) return
-        resetBlockAnimation()
+        resetAllAnimations()
     })
     gameoverscreen.querySelector( 'button' ).addEventListener( 'click', _ => {
         gameSpeed = 'slow'
         hideGameoverscreen()
         startGravity()
-        resetBlockAnimation()
+        resetAllAnimations()
         resetCharacterPosition()
         resetScore()
         changeScoreUi()
@@ -170,10 +197,12 @@ function setEventListeners() {
 }
 
 function gameOver() {
+    (new Audio('/sounds/gameover.wav')).play()
     gameStopped = true
     showGameoverscreen()
     stopBlockAnimation()
     stopGravity()
+    hideStar()
     
 }
 
@@ -199,12 +228,18 @@ const gameSpeedConfig = {
     'ridiculous': 550
 }
 
-function resetBlockAnimation() {
+function resetAllAnimations() {
     const seconds = roundNum( window.innerWidth / gameSpeedConfig[ gameSpeed ] )
-    const animationCss = `blockAnimation ${ seconds }s infinite linear`
+    const blockAnimationCss = `blockAnimation ${ seconds }s infinite linear`
+    
+    block.style.animation = blockAnimationCss 
+    hole.style.animation = blockAnimationCss
+    
+    if ( star.style.display !== 'none' ) return
 
-    block.style.animation = animationCss 
-    hole.style.animation = animationCss
+    const num = getRandomNumber( 1, 5 )
+    const starAnimationCss = `starAnimation${ num } ${ seconds }s infinite linear`
+    star.style.animation = starAnimationCss
 }
 
 function stopBlockAnimation() {
@@ -232,6 +267,16 @@ function hideGameoverscreen() {
     gameoverscreen.style.display = 'none'
 }
 
+function showStar() {
+    if ( star.style.display !== 'none' ) return
+
+    star.style.display = ''
+    star.style.top = `${ getRandomNumber( 20, 70 ) }%`
+}
+function hideStar() {
+    star.style.display = 'none'
+}
+
 ///////////////////////////////////
 
 function gameInit() {
@@ -242,7 +287,9 @@ function gameInit() {
     setEventListeners()
     resetCharacterPosition()
     resetScore()
-    resetBlockAnimation()
+    resetAllAnimations()  
 }
+
+
 
 gameInit()
