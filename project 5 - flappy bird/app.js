@@ -29,7 +29,10 @@ function setInitialValues() {
 
 function initRandomHoles() {
     hole.addEventListener( 'animationiteration', _ => {
-        const randomTop = getRandomNumber( 400, 550 )
+        const fromHeight = 57 * window.innerHeight / 100
+        const toHeight = 97 * window.innerHeight / 100
+
+        const randomTop = getRandomNumber( fromHeight, toHeight )
         hole.style.top = `-${randomTop}px`
     })
 } 
@@ -107,7 +110,7 @@ function handleCharacterAnimation( direction ) {
 
 let numOfHoles = 0
 
-async function handleCharacterCollisions() {
+function handleCharacterCollisions() {
     const colisionBlock =  detectColision( character, block )
     const colisionHole =  detectColision( character, hole, { y1: -46, y2: 47 })
 

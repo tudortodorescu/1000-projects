@@ -37,8 +37,10 @@ body {
 #gameoverscreen button {
     position: absolute;
     z-index: 1;
-    left: 35%;
+    left: calc(50% - 102px);
     top: 40%;
+    width: 205px;
+    text-align: center;
     color: rgb(255, 255, 74);
     font-family: 'PixelarRegularW01-Regular';
     font-weight: normal;
