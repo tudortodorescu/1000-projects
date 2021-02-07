@@ -1,6 +1,5 @@
 @import url(//db.onlinewebfonts.com/c/b2e75c336df191233b3096682c9ee6be?family=PixelarRegularW01-Regular);
 
-
 * {
     padding: 0;
     margin: 0;
@@ -112,13 +111,25 @@ body {
     animation-fill-mode:forwards;
 }
 
+@keyframes rotateUp {
+    0% { transform: rotate( 0deg ) }
+    100% { transform: rotate( -35deg ) }
+}
+@keyframes rotateDown {
+    0% { transform: rotate( 0deg ) }
+    100% { transform: rotate( 35deg ) }
+}
+
+
 @keyframes blockAnimation {
     0% { left: 100vw; }
     100% { left: -50px; }
 }
+
+
 @keyframes backgroundAnimation {
-    0% { background-position-x: 0 }
-    100% { background-position-x: 100vw }
+    0% { background-position-x: 100vw }
+    100% { background-position-x: 0 }
 }
 @keyframes starAnimation1 {
     0% { left: 50vw; }
@@ -140,11 +151,4 @@ body {
     0% { left: 90vw; }
     100% { left: -50px; }
 }
-@keyframes rotateUp {
-    0% { transform: rotate( 0deg ) }
-    100% { transform: rotate( -35deg ) }
-}
-@keyframes rotateDown {
-    0% { transform: rotate( 0deg ) }
-    100% { transform: rotate( 35deg ) }
-}
+
