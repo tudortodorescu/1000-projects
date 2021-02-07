@@ -2,8 +2,12 @@
 export const environment = {
     state: {
         distanceFromCenter: 0,
+        
         worldLeftEdge: -150,
         worldRightEdge: 205,
+
+        boatDistanceVerticalArray: [ 0, 2, 4, 2 ],
+        boatDistanceVertical: 0,
     },
     getters: {
         get distanceFromCenter() {

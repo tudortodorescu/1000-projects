@@ -5,6 +5,7 @@ import { environment } from './environment/environment.store.js'
 import { environmentMovement } from './environment/environment-movement/environment-movement.store.js'
 import { environmentDraw } from './environment/environment-draw/environment-draw.store.js'
 import { gameLoop } from './game-loop/game-loop.store.js'
+import { environmentAnimation } from './environment/environment-animation/environment-animation.store.js'
 
 export default {
     canvas,
@@ -13,5 +14,6 @@ export default {
     environment,
     environmentMovement,
     environmentDraw,
-    gameLoop
+    gameLoop,
+    environmentAnimation,
 }
